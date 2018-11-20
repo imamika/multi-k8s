@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 
-docker build -t karthik047/multi-client:latest -t karthik047/multi-client:$SHA  -f ./client/Dockerfile ./client
+docker build -t karthik047/multi-client:latest -t karthik047/multi-client:$SHA -f ./client/Dockerfile ./client
 docker build -t karthik047/multi-server:latest -t karthik047/multi-server:$SHA -f ./server/Dockerfile ./server
 docker build -t karthik047/multi-worker:latest -t karthik047/multi-worker:$SHA -f ./worker/Dockerfile ./worker
 
-docker push multi-client:latest
-docker push multi-client:$SHA
-docker push multi-server:latest
-docker push multi-server:$SHA
-docker push multi-worker:latest
-docker push multi-worker:$SHA
+docker push karthik047/multi-client:latest
+docker push karthik047/multi-client:$SHA
+
+docker push karthik047/multi-server:latest
+docker push karthik047multi-server:$SHA
+
+docker push karthik047/multi-worker:latest
+docker push karthik047/multi-worker:$SHA
 
 kubectl apply -f k8s
 
