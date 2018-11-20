@@ -15,7 +15,7 @@ before_install:
   - gcloud config set project project-mordin
   - gcloud config set compute/zone us-central1-c
   - gcloud container clusters get-credentials k8s
-  - echo "$DOCKER_PASSWORD" | docker login - u "$DOCKER_USERNAME" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build -t karthik047/react-test -f ./client/Dockerfile.dev ./client
 
 script:
