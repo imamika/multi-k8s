@@ -8,7 +8,7 @@ docker push karthik047/multi-client:latest
 docker push karthik047/multi-client:$SHA
 
 docker push karthik047/multi-server:latest
-docker push karthik047multi-server:$SHA
+docker push karthik047/multi-server:$SHA
 
 docker push karthik047/multi-worker:latest
 docker push karthik047/multi-worker:$SHA
