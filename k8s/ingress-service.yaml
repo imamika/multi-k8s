@@ -6,9 +6,21 @@ metadata:
     kubernetes.io/ingress.class: nginx
     #Replaces the /api with /
     nginx.ingress.kubernetes.io/rewrite-target: /
+
+    #Let Nginx know where to look for certificate
+    certmanager.k8s.io/cluster-issuer: 'letsencrypt-prod'
+
+    # Always redirect the users to HTTPS
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
 spec:
+  tls:
+    - hosts:
+      - terasecurity.com
+      - www.terasecurity.com
+      secretName: terasecurity-com
   rules:
-    - http:
+    - host: terasecurity.com
+      http:
         paths:
           - path: /
             backend:
@@ -18,3 +30,15 @@ spec:
             backend:
               serviceName: server-cluster-ip-service
               servicePort: 5000
+
+    - host: www.terasecurity.com
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: client-cluster-ip-service
+            servicePort: 3000
+        - path: /api
+          backend:
+            serviceName: server-cluster-ip-service
+            servicePort: 5000
